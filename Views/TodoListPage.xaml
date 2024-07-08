@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="TodoApp.Views.TodoListPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="Todo"
+    BackgroundColor="{DynamicResource BackgroundColor}">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Clicked="OnItemAdded" Text="+">
+            <ToolbarItem.IconImageSource>
+                <OnPlatform x:TypeArguments="ImageSource">
+                    <On Platform="Android,UWP" Value="plus.png" />
+                </OnPlatform>
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+         <ToolbarItem Clicked="OnCalendarClicked" Text="Calendar">
+        <ToolbarItem.IconImageSource>
+            <OnPlatform x:TypeArguments="ImageSource">
+                <On Platform="Android,UWP" Value="calendar.png" />
+            </OnPlatform>
+        </ToolbarItem.IconImageSource>
+    </ToolbarItem>
+    </ContentPage.ToolbarItems>
+
+    <StackLayout>
+        <Switch x:Name="modeSwitch" Toggled="OnModeToggled" />
+        <ListView
+            x:Name="listView"
+            Margin="20"
+            ItemSelected="OnListItemSelected"
+            BackgroundColor="Transparent">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout
+                            Margin="10"
+                            BackgroundColor="#ffffff"
+                            Orientation="Horizontal">
+                            <Label
+                                HorizontalOptions="StartAndExpand"
+                                VerticalOptions="Center"
+                                Text="{Binding Name}"
+                                TextColor="{DynamicResource ItemTextColor}"
+                                FontSize="16"
+                                Margin="10,0,0,0"/>
+                            <Image
+                                HorizontalOptions="End"
+                                VerticalOptions="Center"
+                                IsVisible="{Binding Done}"
+                                Source="check.png"
+                                Margin="0,0,10,0"/>
+                            <Image
+                                HorizontalOptions="End"
+                                VerticalOptions="Center"
+                                IsVisible="{Binding IsPriority}"
+                                Source="priority.png"
+                                Margin="0,0,10,0"/>
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+
+</ContentPage>

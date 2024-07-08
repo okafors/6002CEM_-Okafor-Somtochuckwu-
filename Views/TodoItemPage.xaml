@@ -1,0 +1,59 @@
+﻿<ContentPage
+    x:Class="TodoApp.Views.TodoItemPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewModels="clr-namespace:TodoApp.ViewModels"
+    Title="{Binding SelectedTodoItem.Name}">
+
+    <ContentPage.BindingContext>
+        <viewModels:TodoItemViewModel />
+    </ContentPage.BindingContext>
+
+    <ScrollView>
+        <StackLayout Margin="20" Spacing="10">
+            <Label Text="Title" />
+            <Entry Text="{Binding SelectedTodoItem.Name}" />
+
+            <Label Text="Notes" />
+            <Editor Text="{Binding SelectedTodoItem.Notes}" HeightRequest="100" />
+
+            <Label Text="Due Date" />
+            <DatePicker Date="{Binding SelectedTodoItem.DueDate}" />
+
+            <StackLayout Orientation="Horizontal">
+                <CheckBox IsChecked="{Binding SelectedTodoItem.Done}" />
+                <Label Text="Completed" VerticalOptions="Center" />
+            </StackLayout>
+
+            <Button Text="Add Subtask" Command="{Binding AddSubtaskCommand}" />
+
+           <Label Text="Subtasks" FontAttributes="Bold" Margin="0,10,0,0" />
+            <CollectionView ItemsSource="{Binding SelectedTodoItem.Subtasks}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Padding="5,0,5,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <BoxView WidthRequest="2" Color="Gray" HorizontalOptions="Center" VerticalOptions="FillAndExpand" />
+                            <StackLayout Grid.Column="1" Spacing="0">
+                                <Label Text="{Binding Title}" FontAttributes="Bold" />
+                                <Label Text="{Binding Note}" FontSize="Small" TextColor="Gray" />
+                            </StackLayout>
+                            <StackLayout Grid.Column="2" Orientation="Horizontal">
+                                <CheckBox IsChecked="{Binding Done}" />
+                              <Button Text="Delete" Command="{Binding BindingContext.DeleteSubtaskCommand, Source={RelativeSource AncestorType={x:Type ContentPage}}}" CommandParameter="{Binding .}" />
+                            </StackLayout>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <Button Command="{Binding SaveTodoItemCommand}" Text="Save" Margin="0,20,0,0" />
+           <Button Text="Delete" Clicked="OnDeleteClicked" />
+            <Button Command="{Binding CancelCommand}" Text="Cancel" />
+        </StackLayout>
+    </ScrollView>
+</ContentPage>
