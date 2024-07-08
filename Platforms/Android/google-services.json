@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "943249403327",
+    "project_id": "nettodoapp",
+    "storage_bucket": "nettodoapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:943249403327:android:c65d168c0bf328e0da450a",
+        "android_client_info": {
+          "package_name": "com.companyname.todoapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAOj7NzPcT-LjEb51fWyB6azQZPP0Sx45I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
